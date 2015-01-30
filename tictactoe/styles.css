@@ -1,0 +1,44 @@
+body {
+    background-color: white;
+}
+
+.cell {
+    border: 1px solid orange;
+    display: inline-block;
+}
+
+.selected {
+    background-color: lightgray;
+}
+
+#container {
+    margin: 0 auto;
+    top: 50px;
+    width: 320px;
+    height: 320px;
+}
+
+.square {
+    border: 2px solid black;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+img {
+    height: 200px;
+    width: 220px;
+    border-radius: 50%;
+}
+
+h1 {
+    color: black;
+}

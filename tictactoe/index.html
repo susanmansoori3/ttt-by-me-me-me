@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animate.css">
+    <script src="angular.min.js"></script>
+    <script src="scripts/tictactoe.js"></script>
+    <title>Angular Inputs</title>
+</head>
+<body>
+<h1>GANDALF v BALROG</h1>
+
+<div class="left">
+<img src="gandalf.jpg" class="animated bounceInLeft"/>
+</div>
+    <div    ng-app="angularInputsApp"
+            ng-controller="angularInputsCtrl">
+
+        <div id="container">
+            <div ng-repeat="row in board track by $index">
+            <!--Why is it $parent.$index and $index... more research into $index-->
+                <div class="square" ng-repeat="cell in row track by $index" ng-click="makeMove($parent.$index, $index)">
+                    {{ cell == "" ? "&nbsp;" : cell }}
+                </div>
+            </div>
+        </div>
+        <!-- <div ng-repeat="baconBit in bits track by $index" ng-class="{selected: baconBit}">
+            <input type="checkbox" ng-model="baconBit" />
+            {{ baconBit }}  {{ $index }}
+        </div> -->
+    </div>
+
+<div class="right">
+<img src="balrog.jpg" class="animated bounceInRight"/>
+</div>
+
+
+</body>
+</html>
