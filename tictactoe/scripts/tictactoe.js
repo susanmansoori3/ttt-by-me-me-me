@@ -30,10 +30,14 @@ app.controller('angularInputsCtrl', function($scope){
 	//creates turnNum variable starting at 0
 	$scope.turnNum = 0;
 
-	/*win condition logic -- 
-		for loop establishing index of 0, 1, 2
-		
+	$scope.game.p1.onclick
 
+
+
+
+
+	/*win condition logic --
+		for loop establishing index of 0, 1, 2
 	*/
 	function winConditions(piece){
 		// console.log($scope.turnNum);
@@ -42,7 +46,7 @@ app.controller('angularInputsCtrl', function($scope){
 			if(($scope.board[i][0] == $scope.board[i][1]) && ($scope.board[i][0] == $scope.board[i][2]) && ($scope.board[i][0] != "")){
 				alert(piece + " wins in the row horizontal" + i);
 			}
-			// vertical win 
+			// vertical win
 			else if(($scope.board[0][i] == $scope.board[1][i]) && ($scope.board[0][i] == $scope.board[2][i]) && ($scope.board[0][i] != "")){
 				alert(piece + " wins in the row vertical" + i);
 			}
@@ -82,5 +86,3 @@ app.controller('angularInputsCtrl', function($scope){
 	console.log($scope);
 
 });
-
-

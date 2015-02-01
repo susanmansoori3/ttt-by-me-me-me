@@ -8,14 +8,22 @@
     <title>Angular Inputs</title>
 </head>
 <body>
-<h1>GANDALF v BALROG</h1>
 
-<div class="left">
-<img src="gandalf.jpg" class="animated bounceInLeft"/>
+<div class="title-wrap">
+    <h1>GANDALF v BALROG</h1>
 </div>
-    <div    ng-app="angularInputsApp"
-            ng-controller="angularInputsCtrl">
 
+<div class="page-wrap">
+
+    <p>
+      "The Balrog reached the bridge. Gandalf stood in the middle of the span, leaning on the staff in his left hand, but in his other hand Glamdring gleamed, cold and white. His enemy halted again, facing him, and the shadow about it reached out like two vast wings. It raised the whip, and the thongs whined and cracked. Fire came from its nostrils. But Gandalf stood firm."
+    </p>
+
+    <div class="left"><img src="gandalf.jpg" class="animated bounceInLeft"/></div>
+    <div class="right"><img src="balrog.jpg" class="animated bounceInRight"/></div>
+
+    <div ng-app="angularInputsApp"
+         ng-controller="angularInputsCtrl">
         <div id="container">
             <div ng-repeat="row in board track by $index">
             <!--Why is it $parent.$index and $index... more research into $index-->
@@ -24,16 +32,8 @@
                 </div>
             </div>
         </div>
-        <!-- <div ng-repeat="baconBit in bits track by $index" ng-class="{selected: baconBit}">
-            <input type="checkbox" ng-model="baconBit" />
-            {{ baconBit }}  {{ $index }}
-        </div> -->
     </div>
-
-<div class="right">
-<img src="balrog.jpg" class="animated bounceInRight"/>
 </div>
-
 
 </body>
 </html>
