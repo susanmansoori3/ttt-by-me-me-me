@@ -1,20 +1,33 @@
-// var app = angular.module("TicTacApp", []);
-
-// var global;
-
-// app.controller("TicTacCtrl", function($scope) {
-
-// 	$scope.board = ["", "", "", "", "", "", "", "", ""];
-
-// 	$scope.makeMove = function(idx) {
-// 		$scope.board[idx] = "X";
-// 	}
-
 //this connects the app to Angular
-var app = angular.module('angularInputsApp', []);
+var app = angular.module('tttApp', ['firebase']);
 
 //this activates the controller to specified area in html with scope specificiations
-app.controller('angularInputsCtrl', function($scope){
+app.controller('tttController', function($scope, $firebase){
+	
+	var ref=new Firebase('https://tic-tac-toe-lotr.firebaseio.com/board');
+	var sync = $firebase(ref);
+	$scope.board=sync.$asArray();
+	//Set up the number of moves counter in Firebase
+	var counterRef=new Firebase('https://tic-tac-toe-lotr.firebaseio.com/counter');
+	//Create AngularFire reference to data
+	var counterSync = $firebase(counterRef);
+	//download the data into an array
+	$scope.counter=counterSync.$asArray();
+
+	//Set up the array of x moves and o moves in Firebase
+	//x moves is the first record under playerMoves
+	//0 moves is the second record under playerMoves
+	var playerMovesRef = new Firebase('https://tic-tac-toe-lotr.firebaseio.com/playerMoves');
+	var playerMovesSync = $firebase(playerMovesRef);
+	$scope.playerMoves = playerMovesSync.$asArray();
+
+	//Set up variable to hold true/false for if someone won, who won, and if it's a cat's game
+	var someoneWonRef = new Firebase('https://tic-tac-toe-lotr.firebaseio.com/someoneWon');
+	var someoneWonSync = $firebase(someoneWonRef);
+	$scope.someoneWon= someoneWonSync.$asArray();
+
+
+
 
 //creates 3 arrays with this.board and each has 3 spaces
 	$scope.board = [["", "", ""], ["", "", ""], ["", "", ""]];
@@ -44,11 +57,11 @@ app.controller('angularInputsCtrl', function($scope){
 		for(var i = 0; i < 3; i++){
 			//horizontal win
 			if(($scope.board[i][0] == $scope.board[i][1]) && ($scope.board[i][0] == $scope.board[i][2]) && ($scope.board[i][0] != "")){
-				alert(piece + " wins in the row horizontal" + i);
+				alert(piece + " wins!");
 			}
 			// vertical win
 			else if(($scope.board[0][i] == $scope.board[1][i]) && ($scope.board[0][i] == $scope.board[2][i]) && ($scope.board[0][i] != "")){
-				alert(piece + " wins in the row vertical" + i);
+				alert(piece + " wins!");
 			}
 			else if($scope.turnNum == 9){
 				alert("Meow game");
@@ -57,10 +70,10 @@ app.controller('angularInputsCtrl', function($scope){
 		}
 		//diagnol(s) win
 		if(($scope.board[0][0] == $scope.board[1][1]) && ($scope.board[0][0] == $scope.board[2][2]) && ($scope.board[0][0] != "")){
-				alert(piece + " wins in the row " + i);
+				alert(piece + " wins!");
 			}
 		else if(($scope.board[0][2] == $scope.board[1][1]) && ($scope.board[0][2] == $scope.board[2][0]) && ($scope.board[0][2] != "")){
-			alert(piece + " wins in the row " + i);
+			alert(piece + " wins!");
 		}
 	}
 

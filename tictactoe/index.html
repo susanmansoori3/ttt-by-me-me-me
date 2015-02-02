@@ -5,7 +5,11 @@
     <link rel="stylesheet" href="animate.css">
     <script src="angular.min.js"></script>
     <script src="scripts/tictactoe.js"></script>
-    <title>Angular Inputs</title>
+    <title>LOTR TTT</title>
+     <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
 </head>
 <body>
 
@@ -22,8 +26,8 @@
     <div class="left"><img src="gandalf.jpg" class="animated bounceInLeft"/></div>
     <div class="right"><img src="balrog.jpg" class="animated bounceInRight"/></div>
 
-    <div ng-app="angularInputsApp"
-         ng-controller="angularInputsCtrl">
+    <div ng-app="tttApp"
+         ng-controller="tttController">
         <div id="container">
             <div ng-repeat="row in board track by $index">
             <!--Why is it $parent.$index and $index... more research into $index-->
