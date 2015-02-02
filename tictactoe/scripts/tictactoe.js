@@ -4,28 +4,66 @@ var app = angular.module('tttApp', ['firebase']);
 //this activates the controller to specified area in html with scope specificiations
 app.controller('tttController', function($scope, $firebase){
 	
-	var ref=new Firebase('https://tic-tac-toe-lotr.firebaseio.com/board');
-	var sync = $firebase(ref);
-	$scope.board=sync.$asArray();
-	//Set up the number of moves counter in Firebase
-	var counterRef=new Firebase('https://tic-tac-toe-lotr.firebaseio.com/counter');
-	//Create AngularFire reference to data
+	var boardRef = new Firebase("https://tic-tac-toe-lotr.firebaseio.com/board");
+	var boardSync = $firebase(boardRef);
+	$scope.board = boardSync.$asArray();
+
+	var counterRef = new Firebase("https://tic-tac-toe-lotr.firebaseio.com/counter");
 	var counterSync = $firebase(counterRef);
-	//download the data into an array
-	$scope.counter=counterSync.$asArray();
+	$scope.counter = counterSync.$asArray();
 
-	//Set up the array of x moves and o moves in Firebase
-	//x moves is the first record under playerMoves
-	//0 moves is the second record under playerMoves
-	var playerMovesRef = new Firebase('https://tic-tac-toe-lotr.firebaseio.com/playerMoves');
-	var playerMovesSync = $firebase(playerMovesRef);
-	$scope.playerMoves = playerMovesSync.$asArray();
+	var winnerRef = new Firebase("https://tic-tac-toe-lotr.firebaseio.com/winner");
+	var winnerSync = $firebase(winnerRef);
+	$scope.winner = winnerSync.$asArray();
 
-	//Set up variable to hold true/false for if someone won, who won, and if it's a cat's game
-	var someoneWonRef = new Firebase('https://tic-tac-toe-lotr.firebaseio.com/someoneWon');
-	var someoneWonSync = $firebase(someoneWonRef);
-	$scope.someoneWon= someoneWonSync.$asArray();
+	var playerRef = new Firebase("https://tic-tac-toe-lotr.firebaseio.com/player");
+	var playerSync = $firebase(playerRef);
+	$scope.player = playerSync.$asArray();
 
+	$scope.board.$loaded(function(){
+		if($scope.board.length == 0){
+			for(var i = 0; i < 9; i++){
+				$scope.board.$add({playerMove:""});
+			}
+		}
+		else{
+			for(var i = 0; i <9; i++){
+				$scope.board[i].playerMove ="";
+				$scope.board.$save(i);
+			}
+		}
+		
+	});
+
+	$scope.counter.$loaded(function(){
+		if($scope.counter.length == 0){
+			$scope.counter.$add({turn:0});
+		}
+		else if($scope.counter[0].turn < 0){
+			$scope.counter[0].turn = 0;
+			$scope.counter[0].$save(0);
+		}
+
+		else {
+			$scope.counter[0].turn = 0;
+			$scope.counter.$save(0);
+		}
+		
+	});
+
+
+
+
+
+
+  	// $scope.counter.$loaded(function () {
+   //      if ($scope.counter.length === 0) {
+   //          $scope.counter.$add({turnCounter: 0});
+   //      } else {
+   //          $scope.counter[0].turnCounter = 0;
+   //          $scope.counter.$save($scope.counter[0]);
+   //      }
+   //  });
 
 
 
@@ -91,6 +129,8 @@ app.controller('tttController', function($scope, $firebase){
 			winConditions(piece);
 		}
 	};
+
+
 
 	// $scope.squareClick = function(index){
 	// 	$scope.board[Math.floor(index / 3)][index % 3] = "I got clicked!!!";

@@ -7,8 +7,6 @@ h1 {
 }
 
 body {
-    background-color: white;
-    opacity: 50%;
     background: url("moria.png");
 }
 
@@ -54,15 +52,6 @@ img {
 .right {
     position: absolute;
     right: 90px;
-}
-
-.cell {
-    border: 1px solid orange;
-    display: inline-block;
-}
-
-.selected {
-    background-color: lightgray;
 }
 
 #container {
